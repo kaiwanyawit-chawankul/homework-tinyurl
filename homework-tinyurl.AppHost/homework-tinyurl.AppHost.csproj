@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>f3b52f3c-19fe-4b8a-ab51-9799e6f3f170</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="9.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.2.0" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.1.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.11.1" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.11.1" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\homework-tinyurl.WebApi\homework-tinyurl.WebApi.csproj" />
+  </ItemGroup>
+
+</Project>

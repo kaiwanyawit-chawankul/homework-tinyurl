@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.0.0
+MinimumVisualStudioVersion = 17.8.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "homework-tinyurl.AppHost", "homework-tinyurl.AppHost\homework-tinyurl.AppHost.csproj", "{907622FF-5BFE-44C7-9D37-21FDD1D00C64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "homework-tinyurl.ServiceDefaults", "homework-tinyurl.ServiceDefaults\homework-tinyurl.ServiceDefaults.csproj", "{78286818-81BF-4077-A768-1D70CF13BA43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{907622FF-5BFE-44C7-9D37-21FDD1D00C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907622FF-5BFE-44C7-9D37-21FDD1D00C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907622FF-5BFE-44C7-9D37-21FDD1D00C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907622FF-5BFE-44C7-9D37-21FDD1D00C64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78286818-81BF-4077-A768-1D70CF13BA43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78286818-81BF-4077-A768-1D70CF13BA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78286818-81BF-4077-A768-1D70CF13BA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78286818-81BF-4077-A768-1D70CF13BA43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D8DB8CA-32A8-4E3B-9DE6-C2432D557602}
+	EndGlobalSection
+EndGlobal
