@@ -28,51 +28,52 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
+string GenerateRandomString(int length)
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    const string upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const string lowerCase = "abcdefghijklmnopqrstuvwxyz";
+    const string numbers = "0123456789";
+    const string allCharacters = upperCase + lowerCase + numbers;
 
-app.MapGet("/product/{id}", async (int id, IDistributedCache distributedCache) =>
+    Random random = new Random();
+    return new string(Enumerable.Range(0, length)
+                                .Select(_ => allCharacters[random.Next(allCharacters.Length)])
+                                .ToArray());
+}
+
+app.MapPost("/create", async (UrlShortenRequest request, IDistributedCache distributedCache) =>
 {
-    string cacheKey = $"Product_{id}";
-    var cachedProduct = await distributedCache.GetStringAsync(cacheKey);
+    // In a real application, you would typically hash the URL here
+    // or store it in a database. For simplicity, we'll just use a random hash.
 
-    if (string.IsNullOrEmpty(cachedProduct))
-    {
-        // Simulate fetching from DB
-        var product = new Product(id, "Sample Product");
+    string shortenedUrl = request.Hash ?? GenerateRandomString(8); // Generate a random hash if not provided
+    string shortenedUrlLink = $"https://short.ly/{shortenedUrl}";
 
         // Store product in Redis cache for 5 minutes
-        var options = new DistributedCacheEntryOptions()
-            .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+    var options = new DistributedCacheEntryOptions()
+        .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
 
-        await distributedCache.SetStringAsync(cacheKey, product.Name, options); // Store product name for simplicity
+    await distributedCache.SetStringAsync(shortenedUrl, request.Url, options); // Store product name for simplicity
 
-        return Results.Ok(product);
+    // Return the shortened URL response
+    return Results.Ok(new { OriginalUrl = request.Url, ShortenedUrl = shortenedUrlLink });
+});
+
+app.MapGet("/{hash}", async (string hash, IDistributedCache distributedCache) =>
+{
+    var url = await distributedCache.GetStringAsync(hash);
+
+    if (!string.IsNullOrEmpty(url))
+    {
+        // Redirect to the URL if found
+        return Results.Redirect(url);
     }
 
-    return Results.Ok(cachedProduct);
+    // Return a 404 Not Found if the hash is not found
+    return Results.NotFound("URL not found for the given hash.");
 });
 
 app.Run();
 
-record Product(int Id, string Name);
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+record UrlShortenRequest(string Url, string? Hash = null);
