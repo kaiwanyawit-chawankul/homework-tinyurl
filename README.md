@@ -24,3 +24,5 @@ curl -X POST https://localhost:7073/create -H "Content-Type: application/json" -
 
 https://localhost:7073/scalar/#tag/homework-tinyurlwebapi
 
+Fix cors
+https://stackoverflow.com/a/79214366
