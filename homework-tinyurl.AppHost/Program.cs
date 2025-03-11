@@ -7,10 +7,18 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
-builder.AddProject<homework_tinyurl_WebApi>("webApi")
+var webApi = builder.AddProject<homework_tinyurl_WebApi>("webApi")
     .WithExternalHttpEndpoints()
     .WithReference(cache)
-    .WaitFor(cache);
+    .WaitFor(cache)
+    .WithExternalHttpEndpoints();
+
+builder.AddNpmApp("reactvite", "../homework-tinyurl.Vite")
+    .WithReference(webApi)
+    .WithEnvironment("BROWSER", "none")
+    .WithHttpEndpoint(env: "VITE_PORT")
+    .WithExternalHttpEndpoints()
+    .PublishAsDockerFile();
 
 var app = builder.Build();
 
