@@ -26,3 +26,6 @@ https://localhost:7073/scalar/#tag/homework-tinyurlwebapi
 
 Fix cors
 https://stackoverflow.com/a/79214366
+
+
+https://github.com/dotnet/aspire-samples/blob/main/samples/AspireWithJavaScript/AspireJavaScript.Vite/default.conf.template

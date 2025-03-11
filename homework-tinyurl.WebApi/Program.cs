@@ -18,6 +18,16 @@ builder.AddRedisDistributedCache("cache");
 //builder.Services.AddRedis();
 //builder.Services.AddMemoryCache();
 
+builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy",
+                builder => builder
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyHeader());
+        });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +40,9 @@ if (app.Environment.IsDevelopment())
         options.Servers = [];
     });
 }
+
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
