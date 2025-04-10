@@ -60,13 +60,14 @@ string GenerateRandomString(int length)
                                 .ToArray());
 }
 
-app.MapPost("/create", async (UrlShortenRequest request, IDistributedCache distributedCache) =>
+app.MapPost("/create", async (HttpContext httpContext, UrlShortenRequest request, IDistributedCache distributedCache) =>
 {
     // In a real application, you would typically hash the URL here
     // or store it in a database. For simplicity, we'll just use a random hash.
+    var baseUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 
     string shortenedUrl = request.Hash ?? GenerateRandomString(8); // Generate a random hash if not provided
-    string shortenedUrlLink = $"https://short.ly/{shortenedUrl}";
+    string shortenedUrlLink = $"{baseUrl}/{shortenedUrl}";
 
         // Store product in Redis cache for 5 minutes
     var options = new DistributedCacheEntryOptions()

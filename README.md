@@ -1,6 +1,8 @@
 # url-shortener
 
-[] create api
+[x] create api
+[x] fix url for redirect - prefix for shortener
+[] fix reference api from vite
 [] create db
 [] connect with analytic
 [] create frontend
