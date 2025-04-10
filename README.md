@@ -29,3 +29,20 @@ https://stackoverflow.com/a/79214366
 
 
 https://github.com/dotnet/aspire-samples/blob/main/samples/AspireWithJavaScript/AspireJavaScript.Vite/default.conf.template
+
+
+install aspirate
+https://github.com/prom3theu5/aspirational-manifests
+
+
+use aspirate
+inside homework-tinyurl.AppHost
+aspirate generate --output-format compose
+aspirate build
+
+homework-tinyurl.AppHost/aspirate-output/docker-compose.yaml
+update missing config
+image: "reactvite:latest"
+
+inside homework-tinyurl.AppHost/aspirate-output/
+docker-compose up
