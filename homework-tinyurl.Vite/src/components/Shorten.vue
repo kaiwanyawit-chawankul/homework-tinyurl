@@ -23,7 +23,7 @@ const createUrl = async () => {
   error.value = null; // Clear previous error
 
   try {
-    const fetchResponse = await fetch('https://localhost:7073/create', {
+    const fetchResponse = await fetch('/api/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

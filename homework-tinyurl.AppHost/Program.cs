@@ -11,11 +11,12 @@ var webApi = builder.AddProject<homework_tinyurl_WebApi>("webApi")
     .WithExternalHttpEndpoints()
     .WithReference(cache)
     .WaitFor(cache)
-    .WithExternalHttpEndpoints();
+    .WithHttpEndpoint(name: "api");
 
 builder.AddNpmApp("reactvite", "../homework-tinyurl.Vite")
     .WithReference(webApi)
     .WithEnvironment("BROWSER", "none")
+    .WithEnvironment("VITE_API_URL", webApi.GetEndpoint("api"))
     .WithHttpEndpoint(env: "VITE_PORT")
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();

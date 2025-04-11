@@ -2,7 +2,8 @@
 
 [x] create api
 [x] fix url for redirect - prefix for shortener
-[] fix reference api from vite
+[x] fix reference api from vite
+[] fix docker-compose
 [] create db
 [] connect with analytic
 [] create frontend
